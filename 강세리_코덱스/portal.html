@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>구미병원 현황 | 경영분석 포털 시안</title>
+    <style>
+      :root {
+        --blue: #003d8f;
+        --blue-dark: #082f68;
+        --sky: #00a6d6;
+        --bg: #f4f7fb;
+        --panel: #ffffff;
+        --ink: #172033;
+        --muted: #667085;
+        --line: #dfe6ef;
+        --soft-blue: #eaf4ff;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      .app { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+      .sidebar { padding: 34px 28px; background: linear-gradient(180deg, var(--blue-dark), var(--blue)); color: #ffffff; }
+      .logo-row { display: flex; align-items: center; gap: 14px; margin-bottom: 46px; }
+      .logo-mark { display: grid; place-items: center; width: 64px; height: 40px; border-radius: 6px; background: #ffffff; color: var(--blue); font-size: 22px; font-weight: 900; }
+      .brand-name { font-size: 17px; font-weight: 800; line-height: 1.35; }
+      .nav-title { margin: 0 0 14px; color: rgba(255, 255, 255, 0.62); font-size: 12px; font-weight: 800; letter-spacing: 0.12em; }
+      .nav { display: grid; gap: 8px; }
+      .nav a { display: block; padding: 13px 14px; border-radius: 8px; color: rgba(255, 255, 255, 0.78); font-weight: 700; }
+      .nav a.active { background: rgba(255, 255, 255, 0.16); color: #ffffff; }
+      .content { padding: 34px clamp(24px, 4vw, 56px) 52px; }
+      .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
+      .eyebrow { margin: 0 0 8px; color: var(--blue); font-size: 13px; font-weight: 900; letter-spacing: 0.12em; }
+      h1 { margin: 0; font-size: clamp(30px, 4vw, 44px); letter-spacing: -0.03em; }
+      .status { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; background: #ffffff; color: var(--muted); font-size: 14px; font-weight: 700; white-space: nowrap; }
+      .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--sky); }
+
+      .hero-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+        gap: 28px;
+        margin-bottom: 28px;
+        padding: clamp(24px, 4vw, 40px);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(0, 61, 143, 0.94), rgba(0, 166, 214, 0.7)),
+          url("./gumi-hospital-main.jpg");
+        background-size: cover;
+        background-position: center;
+        color: #ffffff;
+        box-shadow: 0 18px 48px rgba(20, 44, 83, 0.14);
+      }
+
+      .hero-panel h2 { margin: 0 0 14px; font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.02em; }
+      .hero-panel p { max-width: 660px; margin: 0; color: rgba(255, 255, 255, 0.84); line-height: 1.75; }
+      .period-box { align-self: start; padding: 22px; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 8px; background: rgba(255, 255, 255, 0.14); backdrop-filter: blur(12px); }
+      .period-box span { display: block; margin-bottom: 8px; color: rgba(255, 255, 255, 0.76); font-size: 13px; font-weight: 800; }
+      .period-box strong { font-size: 24px; }
+
+      .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-bottom: 28px; }
+      .metric, .chart, .table-panel { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+      .metric { padding: 22px; }
+      .metric span { display: block; margin-bottom: 18px; color: var(--muted); font-size: 14px; font-weight: 800; }
+      .metric strong { display: block; margin-bottom: 10px; font-size: 32px; letter-spacing: -0.02em; }
+      .metric em { color: var(--blue); font-style: normal; font-weight: 800; }
+
+      .dashboard-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr); gap: 18px; }
+      .chart, .table-panel { padding: 24px; }
+      .panel-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; }
+      .panel-title h2 { margin: 0; font-size: 20px; }
+      .badge { padding: 7px 10px; border-radius: 999px; background: var(--soft-blue); color: var(--blue); font-size: 12px; font-weight: 900; }
+      .bars { display: grid; gap: 16px; }
+      .bar-row { display: grid; grid-template-columns: 88px minmax(0, 1fr) 54px; align-items: center; gap: 14px; color: var(--muted); font-size: 14px; font-weight: 800; }
+      .track { height: 13px; overflow: hidden; border-radius: 999px; background: #eef2f7; }
+      .fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), var(--sky)); }
+
+      table { width: 100%; border-collapse: collapse; font-size: 14px; }
+      th, td { padding: 15px 0; border-bottom: 1px solid #edf1f6; text-align: left; }
+      th { color: var(--muted); font-size: 13px; }
+      td:last-child, th:last-child { text-align: right; }
+      .placeholder { color: #98a2b3; }
+
+      @media (max-width: 1080px) {
+        .app { grid-template-columns: 1fr; }
+        .sidebar { padding: 24px; }
+        .logo-row { margin-bottom: 22px; }
+        .nav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .hero-panel, .dashboard-grid { grid-template-columns: 1fr; }
+        .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+
+      @media (max-width: 680px) {
+        .content { padding: 26px 18px 42px; }
+        .topbar { flex-direction: column; }
+        .status { white-space: normal; }
+        .nav, .metric-grid { grid-template-columns: 1fr; }
+        .bar-row { grid-template-columns: 72px minmax(0, 1fr) 44px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <aside class="sidebar" aria-label="포털 사이드 메뉴">
+        <a class="logo-row" href="./index.html" aria-label="인트로 화면으로 돌아가기">
+          <span class="logo-mark">SCH</span>
+          <span class="brand-name">순천향대학교<br />부속 구미병원</span>
+        </a>
+        <p class="nav-title">ANALYTICS</p>
+        <nav class="nav">
+          <a class="active" href="#">구미병원 현황</a>
+          <a href="#">수익성 분석</a>
+          <a href="#">진료 실적</a>
+          <a href="#">운영 지표</a>
+        </nav>
+      </aside>
+
+      <section class="content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">SCH GUMI HOSPITAL</p>
+            <h1>구미병원 현황</h1>
+          </div>
+          <div class="status"><span class="dot"></span>화면 승인용 UI 시안</div>
+        </header>
+
+        <section class="hero-panel" aria-label="포털 소개">
+          <div>
+            <h2>경영분석 포털 대시보드</h2>
+            <p>실제 데이터 연동 전 단계의 화면 와이어프레임입니다. 승인 이후 지표 정의, 권한 정책, 데이터 적재 방식을 확정해 개발 단계로 전환합니다.</p>
+          </div>
+          <div class="period-box">
+            <span>분석 기준월</span>
+            <strong>2026.06</strong>
+          </div>
+        </section>
+
+        <section class="metric-grid" aria-label="핵심 지표">
+          <article class="metric"><span>총수익</span><strong>000.0억</strong><em>전월 대비 +0.0%</em></article>
+          <article class="metric"><span>외래 환자</span><strong>00,000명</strong><em>목표 대비 00%</em></article>
+          <article class="metric"><span>입원 환자</span><strong>00,000명</strong><em>병상 가동률 00%</em></article>
+          <article class="metric"><span>수술 건수</span><strong>0,000건</strong><em>전년 대비 +0.0%</em></article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="chart" aria-label="부문별 현황 차트 시안">
+            <div class="panel-title"><h2>부문별 현황</h2><span class="badge">WIREFRAME</span></div>
+            <div class="bars">
+              <div class="bar-row"><span>외래</span><div class="track"><div class="fill" style="width: 74%"></div></div><strong>74%</strong></div>
+              <div class="bar-row"><span>입원</span><div class="track"><div class="fill" style="width: 63%"></div></div><strong>63%</strong></div>
+              <div class="bar-row"><span>응급</span><div class="track"><div class="fill" style="width: 58%"></div></div><strong>58%</strong></div>
+              <div class="bar-row"><span>검진</span><div class="track"><div class="fill" style="width: 46%"></div></div><strong>46%</strong></div>
+            </div>
+          </article>
+
+          <article class="table-panel" aria-label="주요 관리 항목 표 시안">
+            <div class="panel-title"><h2>주요 관리 항목</h2><span class="badge">NO DATA</span></div>
+            <table>
+              <thead><tr><th>항목</th><th>상태</th><th>비고</th></tr></thead>
+              <tbody>
+                <tr><td>수익 지표</td><td class="placeholder">연동 예정</td><td>대기</td></tr>
+                <tr><td>환자 지표</td><td class="placeholder">연동 예정</td><td>대기</td></tr>
+                <tr><td>운영 지표</td><td class="placeholder">연동 예정</td><td>대기</td></tr>
+              </tbody>
+            </table>
+          </article>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
