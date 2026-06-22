@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>일자별 분석 | 구미병원 경영분석 포털</title>
+    <link rel="stylesheet" href="./analysis-pages.css" />
+  </head>
+  <body>
+    <main class="app">
+      <aside class="sidebar">
+        <a class="brand" href="./portal.html"><img class="brand-logo" src="./sch-gumi-logo-white-clean.png?v=official-logo-5" alt="SCH 순천향대학교 구미병원" /><span><small>MANAGEMENT ANALYTICS</small><strong>일자별 분석</strong></span></a>
+        <p class="nav-title">ANALYSIS MENU</p>
+        <nav class="nav">
+          <a class="active" href="./daily-analysis.html"><span class="nav-icon">D</span>일자별 분석</a>
+          <a href="./month-analysis.html"><span class="nav-icon">M</span>회계월 분석</a>
+          <a href="./quarter-analysis.html"><span class="nav-icon">Q</span>회계분기 분석</a>
+          <a href="./professor-analysis.html"><span class="nav-icon">P</span>교수별 분석</a>
+          <a href="./department-analysis.html"><span class="nav-icon">과</span>진료과별 분석</a>
+          <a href="./top-bottom-analysis.html"><span class="nav-icon">T</span>TOP/BOTTOM 분석</a>
+          <a href="./favorite-professors.html"><span class="nav-icon">★</span>관심 교수 현황</a>
+          <a href="./executive-dashboard.html"><span class="nav-icon">E</span>경영진 대시보드</a>
+        </nav>
+      </aside>
+      <section class="content">
+        <header class="topbar"><div><p class="eyebrow">SCH GUMI HOSPITAL</p><h1>일자별 분석</h1><p class="top-copy">일자 단위 환자수, 수입, 수술건수의 최고 실적과 추이를 확인하는 UI 시안입니다.</p></div><div class="status"><span class="dot"></span>UI 시안 · 샘플 데이터</div></header>
+        <section class="filter-panel">
+          <label>회계연도<select><option>2026년</option></select></label>
+          <label>회계월<select><option>06월</option></select></label>
+          <label>기간<input value="2026.06.01 ~ 2026.06.30" /></label>
+          <label>진료과<select><option>전체 진료과</option></select></label>
+        </section>
+        <section class="kpi-grid three">
+          <article class="kpi-card"><span>최고 환자수 일자</span><strong>06.17</strong><em class="up">2,184명</em></article>
+          <article class="kpi-card"><span>최고 수입 일자</span><strong>06.21</strong><em class="up">8.6억</em></article>
+          <article class="kpi-card"><span>최고 수술건수 일자</span><strong>06.12</strong><em class="up">74건</em></article>
+        </section>
+        <section class="grid-2">
+          <article class="chart-card"><div class="panel-title"><h2>일자별 환자수 추이</h2><span class="badge">LINE</span></div><div class="line-chart"><svg viewBox="0 0 640 250"><polyline points="20,202 118,165 216,184 314,116 412,132 510,82 620,98" stroke="#003d8f" stroke-width="5" fill="none" stroke-linecap="round" /></svg></div><div class="axis-labels"><span>1일</span><span>6일</span><span>12일</span><span>18일</span><span>24일</span><span>30일</span></div></article>
+          <article class="chart-card"><div class="panel-title"><h2>일자별 수입 추이</h2><span class="badge">LINE</span></div><div class="line-chart"><svg viewBox="0 0 640 250"><polyline points="20,210 118,188 216,142 314,160 412,104 510,74 620,90" stroke="#00a6d6" stroke-width="5" fill="none" stroke-linecap="round" /></svg></div><div class="axis-labels"><span>1일</span><span>6일</span><span>12일</span><span>18일</span><span>24일</span><span>30일</span></div></article>
+        </section>
+        <article class="table-card">
+          <div class="panel-title"><h2>최고 실적 대비 차이 분석</h2><span class="badge">DIFF</span></div>
+          <div class="table-wrap"><table><thead><tr><th>구분</th><th>기준일</th><th class="num">기준값</th><th>최저일</th><th class="num">최저값</th><th class="num">차이</th><th class="num">차이율</th></tr></thead><tbody>
+            <tr><td>환자수</td><td>06.17</td><td class="num">2,184명</td><td>06.03</td><td class="num">1,284명</td><td class="num">900명</td><td class="num down">-41.2%</td></tr>
+            <tr><td>수입</td><td>06.21</td><td class="num">8.6억</td><td>06.08</td><td class="num">4.1억</td><td class="num">4.5억</td><td class="num down">-52.3%</td></tr>
+            <tr><td>수술건수</td><td>06.12</td><td class="num">74건</td><td>06.24</td><td class="num">31건</td><td class="num">43건</td><td class="num down">-58.1%</td></tr>
+          </tbody></table></div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
