@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="200" viewBox="0 0 720 200" role="img" aria-label="SCH 순천향대학교 구미병원">
-  <rect x="0" y="36" width="304" height="128" fill="#ffffff"/>
-  <text x="78" y="137" fill="#1f3c63" font-family="Arial Black, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="-5">SCH</text>
-  <text x="338" y="88" fill="#ffffff" font-family="Malgun Gothic, Noto Sans KR, Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="-2">순천향대학교</text>
-  <text x="338" y="145" fill="#ffffff" font-family="Malgun Gothic, Noto Sans KR, Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="-2">구미병원</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="128" viewBox="0 0 600 128" role="img" aria-label="SCH 순천향대학교 구미병원">
+  <rect x="0" y="0" width="304" height="128" fill="#ffffff"/>
+  <text x="78" y="101" fill="#1f3c63" font-family="Arial Black, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="-5">SCH</text>
+  <text x="338" y="52" fill="#ffffff" font-family="Malgun Gothic, Noto Sans KR, Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="-2">순천향대학교</text>
+  <text x="338" y="109" fill="#ffffff" font-family="Malgun Gothic, Noto Sans KR, Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="-2">구미병원</text>
 </svg>
