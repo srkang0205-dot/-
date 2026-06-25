@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>일자별 분석 | 구미병원 경영분석 포털</title>
+    <link rel="stylesheet" href="./analysis-pages.css" />
+  </head>
+  <body>
+    <main class="app">
+      <aside class="sidebar">
+        <a class="brand" href="./portal.html"><img class="brand-logo" src="./sch-gumi-logo-white-clean.png?v=official-logo-8" alt="SCH 순천향대학교 구미병원" /><span><small>MANAGEMENT ANALYTICS</small><strong>일자별 분석</strong></span></a>
+        <p class="nav-title">BI DASHBOARD MENU</p>
+        <nav class="nav"><a href="./executive-dashboard.html"><span class="nav-icon">E</span>경영진 대시보드</a><a class="active" href="./daily-analysis.html"><span class="nav-icon">D</span>일자별 분석</a><a href="./month-analysis.html"><span class="nav-icon">M</span>월별 분석</a><a href="./quarter-analysis.html"><span class="nav-icon">Q</span>분기별 분석</a><a href="./department-analysis.html"><span class="nav-icon">C</span>진료과별 분석</a><a href="./professor-analysis.html"><span class="nav-icon">P</span>교수별 분석</a><a href="./top-bottom-analysis.html"><span class="nav-icon">R</span>실적 순위 분석</a><a href="./key-management-indicators.html"><span class="nav-icon">K</span>관리지표</a></nav>
+      </aside>
+      <section class="content">
+        <header class="topbar"><div><p class="eyebrow">DAILY ANALYSIS</p><h1>일자별 분석</h1><p class="top-copy">일자 단위 외래/입원 환자수와 수입, 수술건수의 최고 실적과 차이를 확인하는 UI 시안입니다.</p></div><div class="top-actions"><div class="status"><span class="dot"></span>UI 시안 · 샘플 데이터</div><button class="help-button" type="button" aria-label="지표 도움말" onclick="document.getElementById('helpModal').showModal()">?</button></div></header>
+        <section class="filter-panel">
+          <label>회계연도<select><option>2026년</option></select></label>
+          <label>회계월<select><option>06월</option></select></label>
+          <label>기간<input value="2026.06.01 ~ 2026.06.30" /></label>
+          <label>진료과<select><option>전체 진료과</option></select></label>
+        </section>
+        <section class="kpi-grid three">
+          <article class="kpi-card"><span>최고 환자수 일자</span><strong>06.17</strong><div class="kpi-detail"><span>외래 : <b>1,746명</b></span><span>입원 : <b>438명</b></span><span>합계 : <b>2,184명</b></span></div><div class="kpi-meta"><span>전년동월 : <b>+8.2%</b></span><span>전월 : <b>+5.4%</b></span></div></article>
+          <article class="kpi-card"><span>최고 수입 일자</span><strong>06.21</strong><div class="kpi-detail"><span>외래수입 : <b>4.9억</b></span><span>입원수입 : <b>3.7억</b></span><span>총수입 : <b>8.6억</b></span></div><div class="kpi-meta"><span>전년동월 : <b>+11.6%</b></span><span>전월 : <b>+6.2%</b></span></div></article>
+          <article class="kpi-card"><span>최고 수술건수 일자</span><strong>06.12</strong><div class="kpi-detail"><span>수술건수 : <b>74건</b></span><span>기준 : <b>일 단위 합계</b></span></div><div class="kpi-meta"><span>전년동월 : <b>+4.8%</b></span><span>전월 : <b>+2.1%</b></span></div></article>
+        </section>
+        <section class="grid-2">
+          <article class="chart-card"><div class="panel-title"><h2>일자별 환자수 추이</h2><span class="badge">2 LINES</span></div><div class="chart-legend"><span class="legend-item"><i class="legend-dot"></i>외래환자</span><span class="legend-item"><i class="legend-dot sky"></i>입원환자</span></div><div class="line-chart"><svg viewBox="0 0 640 250"><polyline points="20,190 118,154 216,170 314,102 412,118 510,72 620,88" stroke="#003d8f" stroke-width="5" fill="none" stroke-linecap="round" /><polyline points="20,214 118,196 216,204 314,176 412,184 510,150 620,162" stroke="#00a6d6" stroke-width="5" fill="none" stroke-linecap="round" /></svg><span class="chart-point" style="left:80%;top:29%"></span><span class="chart-point sky" style="left:80%;top:60%"></span><div class="chart-tooltip"><strong>06.17</strong><br />외래환자수 1,746명<br />입원환자수 438명<br />합계 2,184명</div></div><div class="axis-labels"><span>1일</span><span>6일</span><span>12일</span><span>18일</span><span>24일</span><span>30일</span></div></article>
+          <article class="chart-card"><div class="panel-title"><h2>일자별 수입 추이</h2><span class="badge">3 LINES</span></div><div class="chart-legend"><span class="legend-item"><i class="legend-dot"></i>외래수입</span><span class="legend-item"><i class="legend-dot sky"></i>입원수입</span><span class="legend-item"><i class="legend-dot deep"></i>총수입</span></div><div class="line-chart"><svg viewBox="0 0 640 250"><polyline points="20,206 118,182 216,144 314,154 412,112 510,78 620,92" stroke="#003d8f" stroke-width="5" fill="none" stroke-linecap="round" /><polyline points="20,216 118,196 216,172 314,184 412,140 510,102 620,118" stroke="#00a6d6" stroke-width="5" fill="none" stroke-linecap="round" /><polyline points="20,188 118,162 216,116 314,130 412,82 510,48 620,66" stroke="#061f49" stroke-width="5" fill="none" stroke-linecap="round" /></svg><span class="chart-point deep" style="left:80%;top:19%"></span><div class="chart-tooltip"><strong>06.21</strong><br />외래수입 4.9억<br />입원수입 3.7억<br />총수입 8.6억</div></div><div class="axis-labels"><span>1일</span><span>6일</span><span>12일</span><span>18일</span><span>24일</span><span>30일</span></div></article>
+        </section>
+        <article class="table-card">
+          <div class="panel-title"><h2>최고 실적 대비 차이 분석</h2><span class="badge">DIFF</span></div>
+          <div class="table-wrap"><table><thead><tr><th>구분</th><th>기준일</th><th class="num">기준값</th><th>최저일</th><th class="num">최저값</th><th class="num">차이</th><th class="num">차이율</th></tr></thead><tbody>
+            <tr><td>외래환자</td><td>06.17</td><td class="num">1,746명</td><td>06.03</td><td class="num">1,012명</td><td class="num">734명</td><td class="num down">-42.0%</td></tr>
+            <tr><td>입원환자</td><td>06.17</td><td class="num">438명</td><td>06.04</td><td class="num">272명</td><td class="num">166명</td><td class="num down">-37.9%</td></tr>
+            <tr><td>외래수입</td><td>06.21</td><td class="num">4.9억</td><td>06.08</td><td class="num">2.2억</td><td class="num">2.7억</td><td class="num down">-55.1%</td></tr>
+            <tr><td>입원수입</td><td>06.21</td><td class="num">3.7억</td><td>06.08</td><td class="num">1.9억</td><td class="num">1.8억</td><td class="num down">-48.6%</td></tr>
+            <tr><td>총수입</td><td>06.21</td><td class="num">8.6억</td><td>06.08</td><td class="num">4.1억</td><td class="num">4.5억</td><td class="num down">-52.3%</td></tr>
+            <tr><td>수술건수</td><td>06.12</td><td class="num">74건</td><td>06.24</td><td class="num">31건</td><td class="num">43건</td><td class="num down">-58.1%</td></tr>
+          </tbody></table></div>
+        </article>
+      </section>
+    </main>
+    <dialog class="help-modal" id="helpModal"><div class="help-modal-inner"><h2>지표 정의 및 계산 기준</h2><dl><dt>외래환자/입원환자</dt><dd>선택 기간 내 외래 및 입원 환자수를 구분하여 집계합니다.</dd><dt>총수입</dt><dd>외래수입 + 입원수입으로 계산합니다.</dd><dt>전년동월 대비</dt><dd>전년도 동일 월 대비 증감률입니다.</dd><dt>최고 실적 대비 차이</dt><dd>선택 기간 내 최고 실적 기준값과 최저값의 차이 및 차이율입니다.</dd></dl><form method="dialog"><button>닫기</button></form></div></dialog>
+  </body>
+</html>

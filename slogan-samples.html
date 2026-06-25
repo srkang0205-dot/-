@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>슬로건 글씨체 샘플 | 순천향대학교 구미병원</title>
+    <style>
+      :root {
+        --white: #ffffff;
+        --blue: #003d8f;
+        --ink: #172033;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--white);
+        font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+        background:
+          linear-gradient(90deg, rgba(5, 28, 62, 0.78), rgba(5, 28, 62, 0.22), rgba(5, 28, 62, 0.42)),
+          linear-gradient(180deg, rgba(7, 23, 48, 0.1), rgba(7, 23, 48, 0.38)),
+          url("./gumi-hospital-main.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: 52px clamp(28px, 5vw, 72px);
+      }
+
+      .brand-logo {
+        display: block;
+        width: clamp(280px, 24vw, 430px);
+        height: auto;
+        margin-bottom: 54px;
+      }
+
+      .intro-copy {
+        max-width: 760px;
+        margin-bottom: 34px;
+      }
+
+      .intro-copy h1 {
+        margin: 0 0 10px;
+        font-size: 28px;
+      }
+
+      .intro-copy p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 1.7;
+      }
+
+      .samples {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(320px, 1fr));
+        gap: 18px;
+        max-width: 1180px;
+      }
+
+      .sample {
+        min-height: 245px;
+        padding: 28px 30px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 8px;
+        background: rgba(7, 22, 46, 0.42);
+        box-shadow: 0 20px 56px rgba(7, 20, 44, 0.22);
+        backdrop-filter: blur(10px);
+      }
+
+      .sample-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 24px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .tag {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        color: #ffffff;
+        font-size: 12px;
+      }
+
+      .slogan {
+        margin: 0;
+        font-size: clamp(36px, 4vw, 56px);
+        line-height: 1.28;
+        word-break: keep-all;
+        text-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
+      }
+
+      .slogan strong {
+        font-weight: 800;
+      }
+
+      .light {
+        font-weight: 300;
+      }
+
+      .option-1 {
+        font-family: "KoPub Dotum Light", "KoPubWorldDotum Light", "Noto Sans KR", "Malgun Gothic", sans-serif;
+        font-weight: 300;
+      }
+
+      .option-2 {
+        font-family: "KoPub Batang Light", "KoPubWorldBatang Light", "Noto Serif KR", "Batang", serif;
+        font-weight: 300;
+        letter-spacing: 0.01em;
+      }
+
+      .option-3 {
+        font-family: "Noto Serif KR", "Batang", "Nanum Myeongjo", serif;
+        font-weight: 300;
+        letter-spacing: 0.015em;
+      }
+
+      .option-4 {
+        font-family: "Gowun Batang", "KoPub Batang Light", "Batang", serif;
+        font-weight: 300;
+        letter-spacing: 0.02em;
+        font-style: italic;
+      }
+
+      .option-5 {
+        font-family: "Gungsuh", "궁서", "Batang", serif;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+      }
+
+      .option-6 {
+        font-family: "Malgun Gothic", "Noto Sans KR", sans-serif;
+        font-weight: 300;
+        letter-spacing: 0.04em;
+      }
+
+      @media (max-width: 860px) {
+        .samples {
+          grid-template-columns: 1fr;
+        }
+
+        .sample {
+          min-height: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <img class="brand-logo" src="./sch-gumi-logo-white-clean.png?v=official-logo-1" alt="SCH 순천향대학교 구미병원" />
+
+      <section class="intro-copy">
+        <h1>슬로건 글씨체 샘플</h1>
+        <p>배경과 로고는 그대로 두고 슬로건 분위기만 비교하는 화면입니다. 마음에 드는 번호를 골라주시면 메인 화면에 바로 반영하겠습니다.</p>
+      </section>
+
+      <section class="samples" aria-label="슬로건 글씨체 샘플 목록">
+        <article class="sample">
+          <div class="sample-title">1. 현재 방향 <span class="tag">깔끔 / 병원형</span></div>
+          <p class="slogan option-1">
+            하늘의 뜻을 받들어<br />
+            인술을 펼쳐가는<br />
+            <span class="light">고향마을</span> <strong>순천향</strong>
+          </p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-title">2. 명조 라이트 <span class="tag">차분 / 품격</span></div>
+          <p class="slogan option-2">
+            하늘의 뜻을 받들어<br />
+            인술을 펼쳐가는<br />
+            <span class="light">고향마을</span> <strong>순천향</strong>
+          </p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-title">3. 세리프 감성 <span class="tag">고급 / 서정</span></div>
+          <p class="slogan option-3">
+            하늘의 뜻을 받들어<br />
+            인술을 펼쳐가는<br />
+            <span class="light">고향마을</span> <strong>순천향</strong>
+          </p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-title">4. 기울임 감성 <span class="tag">부드러움 / 분위기</span></div>
+          <p class="slogan option-4">
+            하늘의 뜻을 받들어<br />
+            인술을 펼쳐가는<br />
+            <span class="light">고향마을</span> <strong>순천향</strong>
+          </p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-title">5. 붓글씨 계열 <span class="tag">전통 / 강한 인상</span></div>
+          <p class="slogan option-5">
+            하늘의 뜻을 받들어<br />
+            인술을 펼쳐가는<br />
+            <span class="light">고향마을</span> <strong>순천향</strong>
+          </p>
+        </article>
+
+        <article class="sample">
+          <div class="sample-title">6. 넓은 자간 <span class="tag">현대적 / 여백</span></div>
+          <p class="slogan option-6">
+            하늘의 뜻을 받들어<br />
+            인술을 펼쳐가는<br />
+            <span class="light">고향마을</span> <strong>순천향</strong>
+          </p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
