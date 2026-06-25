@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --blue: #003d8f;
   --blue-dark: #082f68;
   --blue-deep: #061f49;
@@ -61,7 +61,7 @@ a {
 
 .brand-logo {
   display: block;
-  width: min(392px, 100%);
+  width: min(196px, 100%);
   height: auto;
   margin-bottom: 20px;
 }
@@ -947,3 +947,4 @@ th.num {
     grid-template-columns: 1fr;
   }
 }
+
