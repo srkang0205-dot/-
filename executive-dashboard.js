@@ -183,14 +183,33 @@ function getComparisons(rows, schema, current, valueGetter, point = false) {
   };
 }
 
-function createStandardKpi({ title, period, value, unit, comparisons }) {
-  return `<article class="kpi-card executive-kpi-card"><span>${title}</span><em class="kpi-month">${formatMonth(period)}</em><strong>${value}<small>${unit || ""}</small></strong><div class="kpi-meta"><span>전년동월 : ${renderRate(comparisons.yoy)}</span><span>전월 : ${renderRate(comparisons.mom)}</span></div></article>`;
+function createSubMetrics(metrics = []) {
+  if (!metrics.length) return "";
+  return `<div class="kpi-submetrics">${metrics.map(([label, value]) => `<span>${label} : <b>${value}</b></span>`).join("")}</div>`;
+}
+
+function createKpiMeta(comparisons) {
+  return `<div class="kpi-meta"><span>전년동월 : ${renderRate(comparisons.yoy)}</span><span>전월 : ${renderRate(comparisons.mom)}</span></div>`;
+}
+
+function createUnifiedKpi({ tag = "article", href = "", className = "", title, period, primary, subMetrics, comparisons, extra = "" }) {
+  const open = tag === "a" ? `<a class="kpi-card executive-kpi-card ${className}" href="${href}">` : `<article class="kpi-card executive-kpi-card ${className}">`;
+  const close = tag === "a" ? "</a>" : "</article>";
+  return `${open}<span>${title}</span><em class="kpi-month">${formatMonth(period)}</em><strong>${primary}</strong>${createSubMetrics(subMetrics)}<div class="kpi-divider"></div>${createKpiMeta(comparisons)}${extra}${close}`;
 }
 
 function createCheckupKpi(current, comparisons, schema, itemSchema) {
   const items = current[schema.checkupItems] || [];
   const rows = items.map((item) => `<li><span>${item[itemSchema.name]}</span><b>${formatNumber(item[itemSchema.count])}건</b><strong>${formatIncome(item[itemSchema.income])}</strong></li>`).join("");
-  return `<article class="kpi-card executive-kpi-card checkup-kpi"><span>검진수입 / 검진건수</span><em class="kpi-month">${formatMonth(current[schema.period])}</em><strong>${formatIncome(current[schema.checkupIncome])}<small>/ ${formatNumber(current[schema.checkupCount])}건</small></strong><div class="kpi-meta"><span>전년동월 : ${renderRate(comparisons.yoy)}</span><span>전월 : ${renderRate(comparisons.mom)}</span></div><ul class="checkup-breakdown">${rows}</ul></article>`;
+  return createUnifiedKpi({
+    title: "검진",
+    period: current[schema.period],
+    primary: `검진건수 : ${formatNumber(current[schema.checkupCount])}건`,
+    subMetrics: [["검진수입", formatIncome(current[schema.checkupIncome])]],
+    comparisons,
+    className: "checkup-kpi",
+    extra: `<ul class="checkup-breakdown">${rows}</ul>`
+  });
 }
 
 function renderBars(containerId, metrics, type) {
@@ -237,9 +256,12 @@ function renderExecutiveDashboard(rows = executiveMockData, schema = executiveSc
   const period = current[schema.period];
   const comparisons = {
     totalIncome: getComparisons(rows, schema, current, (row) => calculateTotalIncome(row, schema)),
-    outpatient: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.outpatientIncome])),
-    inpatient: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.inpatientIncome])),
-    checkup: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.checkupIncome])),
+    outpatient: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.outpatientPatients])),
+    inpatient: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.inpatientPatients])),
+    checkup: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.checkupCount])),
+    outpatientIncome: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.outpatientIncome])),
+    inpatientIncome: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.inpatientIncome])),
+    checkupIncome: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.checkupIncome])),
     surgery: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.surgeryCount])),
     bed: getComparisons(rows, schema, current, (row) => numberOrZero(row[schema.bedOccupancyRate]), true)
   };
@@ -248,32 +270,75 @@ function renderExecutiveDashboard(rows = executiveMockData, schema = executiveSc
   document.getElementById("executiveSummary").textContent = `총수입은 ${formatIncome(calculateTotalIncome(current, schema))}이며, 검진수입을 포함한 최신 월 기준으로 병원 전체 경영현황을 표시합니다.`;
 
   kpiContainer.innerHTML = [
-    createStandardKpi({ title: "총수입", period, value: formatIncome(calculateTotalIncome(current, schema)), comparisons: comparisons.totalIncome }),
-    createStandardKpi({ title: "외래수입 / 외래환자", period, value: formatIncome(current[schema.outpatientIncome]), unit: `/ ${formatNumber(current[schema.outpatientPatients])}명`, comparisons: comparisons.outpatient }),
-    createStandardKpi({ title: "입원수입 / 입원환자", period, value: formatIncome(current[schema.inpatientIncome]), unit: `/ ${formatNumber(current[schema.inpatientPatients])}명`, comparisons: comparisons.inpatient }),
+    createUnifiedKpi({
+      title: "총수입",
+      period,
+      primary: formatIncome(calculateTotalIncome(current, schema)),
+      subMetrics: [
+        ["외래수입", formatIncome(current[schema.outpatientIncome])],
+        ["입원수입", formatIncome(current[schema.inpatientIncome])],
+        ["검진수입", formatIncome(current[schema.checkupIncome])]
+      ],
+      comparisons: comparisons.totalIncome
+    }),
+    createUnifiedKpi({
+      title: "외래환자",
+      period,
+      primary: `외래환자 : ${formatNumber(current[schema.outpatientPatients])}명`,
+      subMetrics: [["외래수입", formatIncome(current[schema.outpatientIncome])]],
+      comparisons: comparisons.outpatient
+    }),
+    createUnifiedKpi({
+      title: "입원환자",
+      period,
+      primary: `입원환자 : ${formatNumber(current[schema.inpatientPatients])}명`,
+      subMetrics: [["입원수입", formatIncome(current[schema.inpatientIncome])]],
+      comparisons: comparisons.inpatient
+    }),
     createCheckupKpi(current, comparisons.checkup, schema, checkupItemSchema),
-    createStandardKpi({ title: "수술건수", period, value: formatNumber(current[schema.surgeryCount]), unit: "건", comparisons: comparisons.surgery })
+    createUnifiedKpi({
+      title: "수술",
+      period,
+      primary: `수술건수 : ${formatNumber(current[schema.surgeryCount])}건`,
+      comparisons: comparisons.surgery
+    })
   ].join("");
-
-  document.getElementById("bedRateValue").textContent = `${numberOrZero(current[schema.bedOccupancyRate]).toFixed(1)}%`;
-  document.getElementById("bedRateYoy").textContent = comparisons.bed.yoy;
-  document.getElementById("bedRateMom").textContent = comparisons.bed.mom;
-  document.getElementById("changeMonth").textContent = formatMonth(period);
-  document.getElementById("riskMonth").textContent = formatMonth(period);
-  document.getElementById("totalYoyRate").textContent = comparisons.totalIncome.yoy;
-  document.getElementById("totalMomRate").textContent = comparisons.totalIncome.mom;
 
   const previous = findRecordByPeriod(rows, schema, getPreviousPeriod(period));
   const previousYear = findRecordByPeriod(rows, schema, getPreviousYearPeriod(period));
   const momAmount = previous ? calculateTotalIncome(current, schema) - calculateTotalIncome(previous, schema) : 0;
   const yoyAmount = previousYear ? calculateTotalIncome(current, schema) - calculateTotalIncome(previousYear, schema) : 0;
-  document.getElementById("totalChangeValue").innerHTML = `${previousYear ? formatIncomeShort(yoyAmount) : "-"} <small>/ ${previous ? formatIncomeShort(momAmount) : "-"}</small>`;
+
+  document.getElementById("executiveSubKpis").innerHTML = [
+    createUnifiedKpi({
+      title: "병상가동률",
+      period,
+      primary: `${numberOrZero(current[schema.bedOccupancyRate]).toFixed(1)}%`,
+      comparisons: comparisons.bed
+    }),
+    createUnifiedKpi({
+      title: "전년동월 대비 총 변화",
+      period,
+      primary: `<span class="kpi-major-lines"><b>${previousYear ? formatIncomeShort(yoyAmount) : "-"}</b><i>전월 대비 총 변화</i><b>${previous ? formatIncomeShort(momAmount) : "-"}</b></span>`,
+      comparisons: comparisons.totalIncome
+    }),
+    createUnifiedKpi({
+      tag: "a",
+      href: "./key-management-indicators.html",
+      className: "risk-card",
+      title: "위험신호",
+      period,
+      primary: "5건",
+      comparisons: { yoy: "-", mom: "-" },
+      extra: `<ul class="risk-details"><li>영상의학과 3개월 연속 감소</li><li>피부과 환자수 감소</li><li>재활의학과 수입 감소</li><li>정형외과 수술건수 감소</li><li>특정 교수 실적 하락</li></ul>`
+    })
+  ].join("");
 
   const chartMetrics = [
     { label: "총수입", ...comparisons.totalIncome },
-    { label: "외래수입", ...comparisons.outpatient },
-    { label: "입원수입", ...comparisons.inpatient },
-    { label: "검진수입", ...comparisons.checkup },
+    { label: "외래수입", ...comparisons.outpatientIncome },
+    { label: "입원수입", ...comparisons.inpatientIncome },
+    { label: "검진수입", ...comparisons.checkupIncome },
     { label: "수술건수", ...comparisons.surgery },
     { label: "병상가동률", ...comparisons.bed }
   ];

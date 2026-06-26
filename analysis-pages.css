@@ -371,7 +371,9 @@ input {
 }
 
 .executive-kpi-card {
-  min-height: 238px;
+  display: flex;
+  min-height: 258px;
+  flex-direction: column;
   text-align: left;
 }
 
@@ -379,13 +381,55 @@ input {
   line-height: 1.22;
 }
 
-.executive-kpi-card strong small {
-  display: block;
-  margin-top: 5px;
+.executive-kpi-card > strong {
+  min-height: 68px;
+  margin-bottom: 10px;
+  font-size: 24px;
+  word-break: keep-all;
 }
 
-.checkup-kpi strong {
+.kpi-submetrics {
+  display: grid;
+  gap: 6px;
+  min-height: 68px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.kpi-submetrics span {
+  margin: 0;
+}
+
+.kpi-submetrics b {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.kpi-major-lines {
+  display: grid;
+  gap: 4px;
+}
+
+.kpi-major-lines b {
+  color: var(--ink);
   font-size: 24px;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.kpi-major-lines i {
+  color: var(--muted);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.kpi-divider {
+  height: 1px;
+  margin: auto 0 11px;
+  background: var(--line);
 }
 
 .checkup-breakdown {
@@ -405,6 +449,12 @@ input {
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
+}
+
+.checkup-breakdown span,
+.risk-details span,
+.kpi-meta span {
+  margin: 0;
 }
 
 .checkup-breakdown b,
