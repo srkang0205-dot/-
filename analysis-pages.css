@@ -332,6 +332,10 @@ input {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.executive-kpi-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .kpi-card {
   padding: 21px;
 }
@@ -357,6 +361,61 @@ input {
   font-weight: 900;
 }
 
+.kpi-card em.kpi-month {
+  display: block;
+  margin: -6px 0 12px;
+  color: var(--blue);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.executive-kpi-card {
+  min-height: 238px;
+  text-align: left;
+}
+
+.executive-kpi-card strong {
+  line-height: 1.22;
+}
+
+.executive-kpi-card strong small {
+  display: block;
+  margin-top: 5px;
+}
+
+.checkup-kpi strong {
+  font-size: 24px;
+}
+
+.checkup-breakdown {
+  display: grid;
+  gap: 5px;
+  margin: 12px 0 0;
+  padding: 11px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.checkup-breakdown li {
+  display: grid;
+  grid-template-columns: minmax(66px, 0.9fr) minmax(58px, 0.7fr) minmax(86px, 1fr);
+  gap: 7px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.checkup-breakdown b,
+.checkup-breakdown strong {
+  margin: 0;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
 .kpi-meta {
   display: grid;
   gap: 2px;
@@ -372,6 +431,46 @@ input {
 
 .kpi-meta b.down {
   color: var(--red);
+}
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  min-height: 160px;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.executive-tooltip {
+  position: relative;
+}
+
+.executive-tooltip::after {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  z-index: 20;
+  width: max-content;
+  max-width: 280px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(6, 31, 73, 0.94);
+  color: #ffffff;
+  content: attr(data-tooltip);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.45;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+  white-space: normal;
+}
+
+.executive-tooltip:hover::after,
+.executive-tooltip:focus-within::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .risk-card {
@@ -926,6 +1025,18 @@ th.num {
   .grid-2,
   .grid-3,
   .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1440px) {
+  .executive-kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1080px) {
+  .executive-kpi-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
