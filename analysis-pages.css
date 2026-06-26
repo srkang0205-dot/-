@@ -409,10 +409,13 @@ input {
 
 .kpi-major-lines {
   display: grid;
-  gap: 4px;
+  gap: 8px;
+  justify-items: start;
+  width: 100%;
 }
 
 .kpi-major-lines b {
+  display: block;
   color: var(--ink);
   font-size: 24px;
   font-weight: 900;
@@ -420,6 +423,7 @@ input {
 }
 
 .kpi-major-lines i {
+  display: block;
   color: var(--muted);
   font-size: 13px;
   font-style: normal;

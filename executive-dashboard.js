@@ -192,10 +192,10 @@ function createKpiMeta(comparisons) {
   return `<div class="kpi-meta"><span>전년동월 : ${renderRate(comparisons.yoy)}</span><span>전월 : ${renderRate(comparisons.mom)}</span></div>`;
 }
 
-function createUnifiedKpi({ tag = "article", href = "", className = "", title, period, primary, subMetrics, comparisons, extra = "" }) {
+function createUnifiedKpi({ tag = "article", href = "", className = "", title, period, primary, subMetrics, comparisons, extra = "", hideMeta = false }) {
   const open = tag === "a" ? `<a class="kpi-card executive-kpi-card ${className}" href="${href}">` : `<article class="kpi-card executive-kpi-card ${className}">`;
   const close = tag === "a" ? "</a>" : "</article>";
-  return `${open}<span>${title}</span><em class="kpi-month">${formatMonth(period)}</em><strong>${primary}</strong>${createSubMetrics(subMetrics)}<div class="kpi-divider"></div>${createKpiMeta(comparisons)}${extra}${close}`;
+  return `${open}<span>${title}</span><em class="kpi-month">${formatMonth(period)}</em><strong>${primary}</strong>${createSubMetrics(subMetrics)}<div class="kpi-divider"></div>${hideMeta ? "" : createKpiMeta(comparisons)}${extra}${close}`;
 }
 
 function createCheckupKpi(current, comparisons, schema, itemSchema) {
@@ -330,6 +330,7 @@ function renderExecutiveDashboard(rows = executiveMockData, schema = executiveSc
       period,
       primary: "5건",
       comparisons: { yoy: "-", mom: "-" },
+      hideMeta: true,
       extra: `<ul class="risk-details"><li>영상의학과 3개월 연속 감소</li><li>피부과 환자수 감소</li><li>재활의학과 수입 감소</li><li>정형외과 수술건수 감소</li><li>특정 교수 실적 하락</li></ul>`
     })
   ].join("");
